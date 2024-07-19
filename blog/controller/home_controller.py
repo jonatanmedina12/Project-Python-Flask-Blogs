@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template
 
-bp = Blueprint('Home', __name__)
+bp = Blueprint('home', __name__)
 
 
 @bp.route('/')
