@@ -9,6 +9,9 @@ def create_app():
 
     app.config.from_object('config.Config')
     db.init_app(app)
+    from flask_ckeditor import CKEditor
+
+    ckeditor = CKEditor(app)
 
     from blog.controller import home_controller
     app.register_blueprint(home_controller.bp)
