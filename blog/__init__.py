@@ -12,6 +12,8 @@ def create_app():
     from flask_ckeditor import CKEditor
 
     ckeditor = CKEditor(app)
+    import locale
+    locale.setlocale(locale.LC_ALL, 'es_ES')
 
     from blog.controller import home_controller
     app.register_blueprint(home_controller.bp)

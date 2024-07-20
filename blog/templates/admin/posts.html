@@ -9,7 +9,7 @@
             <h2 class="mb-3 mt-3">{% block title %}Tus publicaciones{% endblock %}</h2>
             <div class="d-flex justify-content-between mb-3">
                 <p>¡Bienvenido al panel de administración de blogs!</p>
-                <a href="create.html" class="btn btn-outline-success">AÑADIR BLOG</a>
+                <a href="{{ url_for('Post.create_posts') }}" class="btn btn-outline-success">AÑADIR BLOG</a>
             </div>
         </div>
         <table class=" table">
@@ -21,12 +21,12 @@
             </thead>
             <tbody>
                 {% for post in posts | reverse %}
-                    {% if g.user,id == post.author_id %}
+                    {% if g.user.id == post.author_id and post.is_active == 1 %}
                     <tr>
                         <td>{{post.title}} </td>
                         <td>
-                            <a href="update.html" class="btn btn-sm btn-warning">Editar</a>
-                            <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="{{url_for('Post.update_posts',id_=post.id)}}" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="{{url_for('Post.delete_post',id_=post.id)}}" class="btn btn-sm btn-danger">Eliminar</a>
                         </td>
                     </tr>
 

@@ -1,147 +1,71 @@
-
 {% extends 'base.html' %}
 
-{% block content%}
-<body>
+{% block content %}
 
-    <!-- Sección de bienvenida -->
-    <section class="container">
-        <div class="row">
-            <div class="col-md-6 py-5">
-                <h1 class="display-4 fst-italic">{% block title %}Bienvenido a BLOG SPOTS{% endblock %}</h1>
-                <p>Aquí podrás compartir tus ideas, pensamientos y experiencias con una comunidad global de lectores.
-                    Nuestra plataforma es fácil de usar y te permite publicar tus blogs en pocos pasos.
-                </p>
-                <p>
-                    Para empezar, simplemente haz clic en el botón "Publica tu blog" y comienza a escribir. Puedes
-                    incluir
-                    imágenes y videos para dar vida a tus publicaciones y asegurarte de que sean atractivas para tus
-                    lectores.</p>
-                <p>
-                    ¡Únete a nuestra comunidad hoy y comienza a compartir tus ideas con el mundo!
-                </p>
-                <a href="{{ url_for('auth.register') }}" class="btn btn-outline-dark w-50 fs-3">Registrate</a>
-
-            </div>
-            <div class="col-md-6">
-                <img src="  {{ url_for('static', filename='img/bloguer.jpg') }}" alt="Imagen de bienvenida" class="img-fluid">
-            </div>
+<!-- Sección de bienvenida -->
+<section class="container my-5" {{value}}>
+    <div class="row align-items-center">
+        <div class="col-md-6 py-5">
+            <h1 class="display-4 fst-italic">{% block title %}Bienvenido a BLOG SPOTS{% endblock %}</h1>
+            <p class="lead">Aquí podrás compartir tus ideas, pensamientos y experiencias con una comunidad global de lectores. Nuestra plataforma es fácil de usar y te permite publicar tus blogs en pocos pasos.</p>
+            <p>Para empezar, simplemente haz clic en el botón "Publica tu blog" y comienza a escribir. Puedes incluir imágenes y videos para dar vida a tus publicaciones y asegurarte de que sean atractivas para tus lectores.</p>
+            <p>¡Únete a nuestra comunidad hoy y comienza a compartir tus ideas con el mundo!</p>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-outline-dark btn-lg mt-3">Regístrate</a>
         </div>
-    </section>
-
-    <div class="text-center">
-        <div class="py-5">
-            <h2 class="display-4 fst-italic">¿Buscas algo en particular?</h2>
-            <div class="col-lg-6 mx-auto">
-                <p class="fs-5 mb-4">Utiliza nuestro buscador para encontrar blogs específicos o temas que te interesen.
-                    Simplemente ingresa una
-                    palabra clave o frase y haz clic en "buscar". ¡Te sorprenderá lo fácil que es encontrar el contenido
-                    que
-                    buscas!
-                </p>
-
-                <div class="col container">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search"
-                            placeholder="Buscar" aria-label="Search">
-                        <button type="button" class="btn btn-primary btn-lg">Buscar</button>
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='img/bloguer.jpg') }}" alt="Imagen de bienvenida" class="img-fluid rounded">
         </div>
     </div>
+</section>
 
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML que deves conocer</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML que deves conocer</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML que deves conocer</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Etiquetas HTML que deves conocer</h3>
-                        <span class="mb-1 text-muted">Nov 12</span>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content.</p>
-                        <a href="blog.html" class="stretched-link">Continuar leendo</a>
-                    </div>
-                </div>
-            </div>
+<div class="text-center bg-light py-5">
+    <div class="container">
+        <h2 class="display-4 fst-italic">¿Buscas algo en particular?</h2>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">Utiliza nuestro buscador para encontrar blogs específicos o temas que te interesen. Simplemente ingresa una palabra clave o frase y haz clic en "Buscar". ¡Te sorprenderá lo fácil que es encontrar el contenido que buscas!</p>
+            <form class="d-flex justify-content-center" method="POST" action="{{ url_for('home.index_home') }}">
+                <input class="form-control me-2 w-50" type="search" name="search" placeholder="Buscar" aria-label="Search">
+                <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+            </form>
         </div>
-    </main>
+    </div>
+</div>
 
-
-</body>
+<main class="container py-5">
+    <div class="row">
+        {% set hay_posts_activos = False %}
+        {% for post in posts %}
+            {% if post.is_active == 1 %}
+                {% set hay_posts_activos = True %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title">{{ post.title }}</h3>
+                            <p class="card-text mb-auto">{{ post.info }}</p>
+                            <a href="{{ url_for('home.blog_home', url=post.url) }}" class="btn btn-primary mt-3">Continuar leyendo</a>
+                            <div class="mt-3 d-flex align-items-center">
+                                {% if get_user(post.author_id).photo is none %}
+                                    <img src="{{ url_for('static', filename='img/user-dark.png') }}" width="30" alt="author photo" class="rounded-circle">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename=get_user(post.author_id).photo) }}" width="30" class="rounded-circle" alt="author photo">
+                                {% endif %}
+                                <span class="ms-2 text-muted">
+                                    <b>{{ get_user(post.author_id).username }}</b>
+                                    <br>
+                                    {{ post.created_on.strftime('%d de %B %Y') }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% if not hay_posts_activos %}
+            <div class="col-12">
+                <h2 class="display-4 fst-italic text-center">Sin blogs activos</h2>
+            </div>
+        {% endif %}
+    </div>
+</main>
 
 {% endblock %}
-
-

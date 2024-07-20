@@ -84,23 +84,24 @@
 
 
 
-    {% if get_flashed_messages() %}
-      <div class="container mt-3">
-          <div class="row">
-              <div class="col-md-6 mx-auto">
-                  {% for mensaje in get_flashed_messages() %}
-                    <div class="alert alert-danger" role="alert">
-                      {{ mensaje }}
-                    </div>
-                  {% endfor %}
-              </div>
-          </div>
-      </div>
+    {% if get_flashed_messages(with_categories=True) %}
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    {% for category, mensaje in get_flashed_messages(with_categories=True) %}
+                        <div class="alert alert-{{ category }}" role="alert">
+                            {{ mensaje }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     {% endif %}
     {% block content %}
     {% endblock %}
-
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    {{ckeditor.load() }}
+
 </body>
 
 </html>
