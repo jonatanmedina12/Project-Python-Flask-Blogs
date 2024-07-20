@@ -1,5 +1,4 @@
 from functools import wraps
-
 from flask import Blueprint, render_template, request, url_for, g, redirect, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -18,16 +17,18 @@ def login():
         error = None
         if email == "" or password == "":
             error = 'Campos Vacíos'
+            flash(error, 'danger')
         else:
             users = User.query.filter_by(email=email).first()
             if users is None or not check_password_hash(users.password, password):
                 error = 'Correo o contraseña incorrecta'
+                flash(error, 'danger')
 
             if error is None:
                 session.clear()
                 session['user_id'] = users.id
+                flash('Inicio de sesión exitoso.', 'success')
                 return redirect(url_for('Post.posts'))
-        flash(error)
 
     return render_template('auth/login.html')
 
@@ -36,7 +37,6 @@ def login():
 def register():
     from blog.models.modelos import User
     from blog import db
-    error = None
 
     if request.method == 'POST':
         username = request.form.get('username')
@@ -44,7 +44,7 @@ def register():
         password = request.form.get('password')
         if username is None or password is None or email is None:
             error = 'Campos obligatorios'
-            flash(error)
+            flash(error, 'danger')
 
         users = User(username, generate_password_hash(password), email, None)
 
@@ -52,10 +52,11 @@ def register():
         if user_email is None:
             db.session.add(users)
             db.session.commit()
+            flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
             return redirect(url_for('auth.login'))
         else:
-            error = f'El correo {email} ya esta registrado'
-        flash(error)
+            error = f'El correo {email} ya está registrado'
+            flash(error, 'danger')
 
     return render_template('auth/register.html')
 
@@ -72,36 +73,40 @@ def login_required(view):
 
 @bp.route('/profile/<int:id>', methods=('GET', 'POST'))
 @login_required
-def profile(id):
+def profile(id_):
     from blog.models.modelos import User
     from blog import db
-    user = User.query.get_or_404(id)
+    user = User.query.get_or_404(id_)
     error = None
     if request.method == 'POST':
         user.username = request.form.get('username')
         password = request.form.get('password')
 
         if len(password) != 0:
-            user.password = generate_password_hash(password)
-        elif 0 < len(password) < 6:
-            error = 'La contraseña debe tener mas de 5 caracteres'
+            if len(password) < 6:
+                error = 'La contraseña debe tener más de 5 caracteres'
+                flash(error, 'danger')
+            else:
+                user.password = generate_password_hash(password)
         if request.files['photo']:
             photo = request.files['photo']
             photo.save(f'blog/static/media/{secure_filename(photo.filename)}')
             user.photo = f'media/{secure_filename(photo.filename)}'
 
         if error is not None:
-            flash(error)
+            flash(error, 'danger')
         else:
             db.session.commit()
+            flash('Perfil actualizado correctamente.', 'success')
             return redirect(url_for('auth.profile', id=user.id))
-        flash(error)
+
     return render_template('auth/profile.html', user=user)
 
 
 @bp.route('/logout')
 def logout():
     session.clear()
+    flash('Cierre de sesión exitoso.', 'success')
     return redirect(url_for('home.index_home'))
 
 
